@@ -14,9 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
   var loading = false;
   late List<dynamic> pratos;
+  @override
   void initState() {
     super.initState();
   }
