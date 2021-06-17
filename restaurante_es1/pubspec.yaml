@@ -52,6 +52,7 @@ flutter:
     - images/prato.png
     - images/rato.png
     - images/sopinha.png
+    - images/person.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

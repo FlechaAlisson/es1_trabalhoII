@@ -17,4 +17,11 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
+
+  static final TextStyle textSimple = GoogleFonts.notoSans(
+    decoration: TextDecoration.none,
+    fontWeight: FontWeight.w400,
+    color: AppColors.black,
+    fontSize: 16,
+  );
 }

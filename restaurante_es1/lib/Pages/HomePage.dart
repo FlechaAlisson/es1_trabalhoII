@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurante_es1/Pages/PerfilPage.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
-import 'package:restaurante_es1/widgets/tilePlateWidget.dart';
+import 'package:restaurante_es1/widgets/HomePageWidget/tilePlateWidget.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -38,7 +39,16 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Restaurante XPTO"),
-          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PerfilPage(),
+                      ),
+                    ),
+                icon: Icon(CupertinoIcons.person_fill))
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => print('oi'),
@@ -48,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         body: Container(
           color: AppColors.background,
           child: Container(
-            padding: EdgeInsets.fromLTRB(5, 15, 5, 0),
+            padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
             child: Center(
                 child: FutureBuilder(
               future: loadData(),
