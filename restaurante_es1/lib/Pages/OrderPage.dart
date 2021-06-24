@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
@@ -152,7 +153,13 @@ class _BookingPageState extends State<BookingPage> {
                             fixedSize:
                                 Size(MediaQuery.of(context).size.width, 50)),
                         onPressed: () {
-                          _showToast();
+                          Fluttertoast.showToast(
+                            webBgColor:
+                                "linear-gradient(to right, #00b09b, #00b09b)",
+                            webPosition: "center",
+                            msg: "Pedido realizado com sucesso!",
+                            fontSize: 30,
+                          );
                           Navigator.pop(context);
                         },
                         child: const Text('CONFIRMAR PEDIDO'),
@@ -163,19 +170,6 @@ class _BookingPageState extends State<BookingPage> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  void _showToast() {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.green,
-        content: Text(
-          "Pedido realizado com sucesso!",
-          style: AppTextStyles.title,
         ),
       ),
     );
