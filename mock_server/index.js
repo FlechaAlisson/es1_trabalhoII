@@ -40,7 +40,7 @@ app.get("/prato/1", (req, res) => {
             valor: "12.30",
             nome: "Ratattoile",
             photoPath: 'images/rato.png',
-            descricao_completa: ' é uma clássica receita francesa provençal de legumes cozidos do século XVIII, podendo ser servida quente ou fria, sozinha ou como acompanhamento.',
+            descricao_completa: 'É uma clássica receita francesa provençal de legumes cozidos do século XVIII, podendo ser servida quente ou fria, sozinha ou como acompanhamento.',
             ingredientes: 'Abobrinha, berinjela, cebola, alho, tomates, pimentões, alecrim, manjericão, '
 
         }

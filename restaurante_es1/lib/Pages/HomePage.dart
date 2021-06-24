@@ -60,6 +60,9 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
             child: Center(
+
+                //Future Builder: Enquanto não carrega retorna um loading
+                // se carrega, retorna os widgets da pagina
                 child: FutureBuilder(
               future: loadData(),
               builder: (context, snapshot) {

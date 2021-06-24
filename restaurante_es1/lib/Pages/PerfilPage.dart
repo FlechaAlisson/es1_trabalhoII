@@ -15,7 +15,7 @@ class PerfilPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          avatarWidget(),
+          AvatarWidget(),
           Divider(),
           SizedBox(
             height: 10,

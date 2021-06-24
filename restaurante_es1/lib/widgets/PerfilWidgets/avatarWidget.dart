@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
 
-class avatarWidget extends StatelessWidget {
-  const avatarWidget({Key? key}) : super(key: key);
+class AvatarWidget extends StatelessWidget {
+  const AvatarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

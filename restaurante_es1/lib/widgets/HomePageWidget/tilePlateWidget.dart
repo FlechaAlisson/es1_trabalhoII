@@ -38,6 +38,7 @@ class tileFoodWidget extends StatelessWidget {
           color: AppColors.white,
           child: Row(
             children: [
+              // Container de imagem
               Container(
                 width: 50.0,
                 height: 50.0,
@@ -50,6 +51,7 @@ class tileFoodWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(360.0)),
                 ),
               ),
+              // Container de texto
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
                 child: Column(
@@ -59,6 +61,7 @@ class tileFoodWidget extends StatelessWidget {
                       this.nome,
                       style: AppTextStyles.title,
                     ),
+                    // acho q uma box entre o titulo e descrição
                     SizedBox(
                       height: 1,
                     ),
