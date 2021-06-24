@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurante_es1/Pages/OrderPage.dart';
 import 'package:restaurante_es1/Pages/PerfilPage.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/widgets/HomePageWidget/tilePlateWidget.dart';
@@ -51,7 +52,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => print('oi'),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  !loading ? BookingPage(pratos: pratos) : Container(),
+            ),
+          ),
           backgroundColor: AppColors.primaryColor,
           child: Icon(CupertinoIcons.calendar_badge_plus),
         ),

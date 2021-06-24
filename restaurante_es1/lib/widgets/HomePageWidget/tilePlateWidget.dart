@@ -24,11 +24,13 @@ class tileFoodWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DishPage(
-                      id: id,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => DishPage(
+              id: id,
+            ),
+          ),
+        );
       },
       child: Material(
         elevation: 5,
