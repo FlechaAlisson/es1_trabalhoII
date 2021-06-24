@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Restaurante XPTO"),
+          title: Text("Restaurante da Isabola"),
           actions: [
             IconButton(
                 onPressed: () => Navigator.push(

@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
+import 'package:restaurante_es1/widgets/DishPageWidget/selectQuantityWidget.dart';
 
 class DishPage extends StatefulWidget {
   final int id;
@@ -14,6 +16,8 @@ class DishPage extends StatefulWidget {
 }
 
 class _DishPageState extends State<DishPage> {
+  // pesquisar null safety
+  var quantidadePedido = 1;
   var loading = false;
   late Map<String, dynamic> prato;
 
@@ -36,122 +40,138 @@ class _DishPageState extends State<DishPage> {
   Widget build(BuildContext context) {
     //ctrl ponto
     return Container(
-      child: FutureBuilder(
-        future: loadData(),
-        builder: (context, snapshot) {
-          if (!loading) {
-            return Material(
-              child: Column(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 3 / 2,
-                    child: Container(
-                      height: 100,
-                      width: 500,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              prato['photoPath'],
-                            ),
-                            fit: BoxFit.fill),
-                      ),
-                    ),
-                  ),
-                  Container(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      color: AppColors.background,
+      child: ListView(children: [
+        Container(
+          child: FutureBuilder(
+            future: loadData(),
+            builder: (context, snapshot) {
+              if (!loading) {
+                return Material(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 40, 0, 0),
-                        child: Text(
-                          prato['nome'],
-                          style: AppTextStyles.title,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 10, 0, 40),
-                        child: Text(
-                          prato['descricao_completa'],
-                          style: AppTextStyles.discription,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 10, 0, 10),
-                        child: Text(
-                          'R\$ ' + prato['valor'],
-                          style: AppTextStyles.title,
-                        ),
-                      ),
-                      Divider(),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
-                        child: Row(children: [
-                          Icon(Icons.article_outlined),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Observações',
-                            style: AppTextStyles.textSimple,
-                          ),
-                        ]),
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 0, 10),
-                        width: 450,
-                        height: 200,
-                        child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintStyle: AppTextStyles.discription,
-                              hintText: 'Ex: Tirar cebola',
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.fromLTRB(30, 100, 10, 0),
-                            child: Row(
-                              children: [
-                                Icon(Icons.remove),
-                                SizedBox(
-                                  width: 10,
+                      AspectRatio(
+                        aspectRatio: 3 / 2,
+                        child: Container(
+                          height: 100,
+                          width: 500,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  prato['photoPath'],
                                 ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    '1',
-                                    style: AppTextStyles.title,
+                                fit: BoxFit.fill),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          color: AppColors.background,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 40, 0, 0),
+                                child: Text(
+                                  prato['nome'],
+                                  style: AppTextStyles.title,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 10, 0, 40),
+                                child: Text(
+                                  prato['descricao_completa'],
+                                  style: AppTextStyles.discription,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 10, 0, 10),
+                                child: Text(
+                                  'R\$ ' + prato['valor'],
+                                  style: AppTextStyles.title,
+                                ),
+                              ),
+                              Divider(),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                                child: Row(children: [
+                                  Icon(Icons.article_outlined),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Observações',
+                                    style: AppTextStyles.textSimple,
+                                  ),
+                                ]),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 0, 0, 10),
+                                width: 480,
+                                height: 200,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 16),
+                                  child: TextField(
+                                    maxLines: 3,
+                                    decoration: InputDecoration(
+                                      hintText: "Exemplo: tirar cebola.",
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: AppColors.primaryColor,
+                                            width: 2.0),
+                                      ),
+                                      border: OutlineInputBorder(),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(Icons.add)
-                              ],
-                            ),
-                          )
-                        ],
-                      )
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  selectQuantityWidget(),
+                                  Spacer(),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        textStyle: AppTextStyles.title,
+                                        primary: AppColors.primaryColor,
+                                        fixedSize: Size(
+                                            MediaQuery.of(context).size.width /
+                                                1.5,
+                                            50)),
+                                    onPressed: () {
+                                      Fluttertoast.showToast(
+                                          webBgColor:
+                                              "linear-gradient(to right, #00b09b, #00b09b)",
+                                          webPosition: "center",
+                                          msg: "Prato adicionado ao pedido!",
+                                          fontSize: 30,
+                                          timeInSecForIosWeb: 2);
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('ADICIONAR'),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  )
+                                ],
+                              )
+                            ],
+                          ))
                     ],
-                  ))
-                ],
-              ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      AppColors.primaryColor)),
-            );
-          }
-        },
-      ),
+                  ),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.primaryColor)),
+                );
+              }
+            },
+          ),
+        ),
+      ]),
     );
   }
 }

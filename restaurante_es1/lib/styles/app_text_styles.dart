@@ -24,4 +24,11 @@ class AppTextStyles {
     color: AppColors.black,
     fontSize: 16,
   );
+
+  static final TextStyle textButton = GoogleFonts.notoSans(
+    decoration: TextDecoration.none,
+    color: AppColors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
 }

@@ -69,7 +69,7 @@ app.get("/prato/3", (req, res) => {
             valor: "60,50",
             nome: "Canard à l'Orange",
             photoPath: 'images/orange.png',
-            descricao: 'É um pato ao molho de laranja',
+            descricao_completa: 'É um pato ao molho de laranja',
             ingredientes: 'Carne de pato, laranja, batata, açucar, óleo de soja e vinha.'
 
         }
