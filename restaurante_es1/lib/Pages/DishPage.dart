@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
+import 'package:restaurante_es1/client/pratosClient.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
 import 'package:restaurante_es1/widgets/DishPageWidget/selectQuantityWidget.dart';
+
+typedef void IntCallback(int qt);
 
 class DishPage extends StatefulWidget {
   final int id;
@@ -20,18 +20,16 @@ class _DishPageState extends State<DishPage> {
   var quantidadePedido = 1;
   var loading = false;
   late Map<String, dynamic> prato;
+  PratosClient client = PratosClient();
 
   loadData() async {
     loading = true;
-    await http.get(Uri.parse('http://localhost:3000/prato/${widget.id}'),
-        headers: {
-          "Accept": "application/json",
-          "Access-Control_Allow_Origin": "*"
-        }).then((value) {
-      prato = jsonDecode(value.body);
-      print(prato);
-      loading = false;
-    });
+    prato = await client.getPrato(widget.id);
+    loading = false;
+  }
+
+  void updateQt(int qt) {
+    quantidadePedido = qt;
   }
 
 //Primeiro transformar de JSON para uma tipo de dado do flutter
@@ -129,7 +127,9 @@ class _DishPageState extends State<DishPage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  selectQuantityWidget(),
+                                  selectQuantityWidget(
+                                    onChangeQt: (int qt) => updateQt(qt),
+                                  ),
                                   Spacer(),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(

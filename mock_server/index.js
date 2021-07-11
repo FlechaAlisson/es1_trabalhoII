@@ -6,7 +6,7 @@ var cors = require('cors')
 
 app.use(cors())
 
-app.get("/", (req, res) => {
+app.get("/prato", (req, res) => {
     res.json(
         [
             {
