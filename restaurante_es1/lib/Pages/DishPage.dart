@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:restaurante_es1/client/pratosClient.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
+import 'package:restaurante_es1/widgets/DishPageWidget/favoriteIcon.dart';
 import 'package:restaurante_es1/widgets/DishPageWidget/selectQuantityWidget.dart';
 
 typedef void IntCallback(int qt);
@@ -68,22 +69,32 @@ class _DishPageState extends State<DishPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: EdgeInsets.fromLTRB(30, 40, 0, 0),
-                                child: Text(
-                                  prato['nome'],
-                                  style: AppTextStyles.title,
-                                ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.fromLTRB(30, 40, 30, 0),
+                                      child: Text(
+                                        prato['nome'],
+                                        style: AppTextStyles.title,
+                                      ),
+                                    ),
+                                  ),
+                                  FavoriteIcon(
+                                    wasFavorite: true,
+                                  )
+                                ],
                               ),
                               Container(
-                                padding: EdgeInsets.fromLTRB(30, 10, 0, 40),
+                                padding: EdgeInsets.fromLTRB(30, 10, 30, 40),
                                 child: Text(
                                   prato['descricao_completa'],
                                   style: AppTextStyles.discription,
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.fromLTRB(30, 10, 0, 10),
+                                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                                 child: Text(
                                   'R\$ ' + prato['valor'],
                                   style: AppTextStyles.title,

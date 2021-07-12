@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurante_es1/Pages/OrderPage.dart';
@@ -69,12 +70,14 @@ class _HomePageState extends State<HomePage> {
                 if (!loading) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        return tileFoodWidget(
-                            id: pratos[index]['id'],
-                            valor: pratos[index]['valor'],
-                            nome: pratos[index]['nome'],
-                            photoPath: pratos[index]['photoPath'],
-                            descricao: pratos[index]['descricao']);
+                        return AnimatedCard(
+                          child: tileFoodWidget(
+                              id: pratos[index]['id'],
+                              valor: pratos[index]['valor'],
+                              nome: pratos[index]['nome'],
+                              photoPath: pratos[index]['photoPath'],
+                              descricao: pratos[index]['descricao']),
+                        );
                       },
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(
