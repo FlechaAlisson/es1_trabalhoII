@@ -7,8 +7,12 @@ class Servico{
         return db.ListaPratos();
     }
     
-    RealizaPedido(id_cliente, pratos){
-        return db.RealizaPedido(id_cliente, pratos);
+    getPrato(id_prato){
+        return db.getPrato(id_prato);
+    }
+
+    RealizaPedido(id_cliente, valor_total , pratos){
+        return db.RealizaPedido(id_cliente, valor_total , pratos);
     }
 
 }

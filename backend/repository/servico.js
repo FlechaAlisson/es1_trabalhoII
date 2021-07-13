@@ -5,33 +5,18 @@ class User{
         return await db.query(`SELECT * FROM prato`);
     }
 
-    async valorPratos(pratos){
-        var valor_total = 0;
-
-        for(var i in pratos){
-
-            var result = await db.query(`SELECT valor FROM prato WHERE id = ?`, [pratos[i]])
-
-            valor_total += result[0].valor;
-        }
-
-        return valor_total;
+    async getPrato(id_prato){
+        return await db.query(`SELECT * FROM prato WHERE id = ?`, [id_prato]);
     }
 
-    async RealizaPedido(id_cliente, pratos){
-        const total = await this.valorPratos(pratos);
-
+    async RealizaPedido(id_cliente, valor_total ,pratos){
         return await db.query(`
             INSERT INTO pedido(id_cliente, data_pedido, valor_pedido) VALUES (?, CURRENT_TIMESTAMP, ?);
-        `, [id_cliente, total])
+        `, [id_cliente, valor_total])
             .then(resultado => {
                 pratos.map(async prato =>{
-                    await db.query(`INSERT INTO pratos_pedidos(id_prato, id_pedido) VALUES (?,?)`, [prato, resultado.insertId])
-                        .then()
-                        .catch(e => {
-                            //console.log(e);
-                            throw e;
-                        })
+                    await db.query(`INSERT INTO pratos_pedidos(id_prato, id_pedido, quantidade, valor_acumulado) VALUES (?,?,?, ((SELECT valor FROM prato WHERE prato.id = ?) * ?))`, 
+                    [prato.id, resultado.insertId, prato.quantidade, prato.id, prato.quantidade])
                 })
             })
             .catch(e => {

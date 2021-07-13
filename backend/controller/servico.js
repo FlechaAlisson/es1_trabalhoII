@@ -12,9 +12,19 @@ module.exports = (app) => {
                 return res.status(500).json(err)
             });
     })
+
+    app.get("/servico/pratos/:id", (req, res) => {
+        servicoModel.getPrato(req.params.id)
+            .then(prato => {
+                return res.json(prato);
+            })
+            .catch(err => {
+                return res.status(500).json(err);
+            })
+    })
     
     app.post("/servico/pedido-confirmado", (req, res) => {
-        servicoModel.RealizaPedido(req.body.id_cliente, req.body.id_pratos)
+        servicoModel.RealizaPedido(req.body.id_cliente, req.body.valor_total, req.body.pratos)
             .then(() =>{
                 return res.json({mensagem: 'Pedido realizado!'});
             }) 

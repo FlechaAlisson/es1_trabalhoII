@@ -1,5 +1,5 @@
 const mysql = require( 'mysql' );
-
+require('dotenv').config()
 class Database {
     constructor( config ) {
         this.connection = mysql.createConnection( config );
@@ -25,8 +25,8 @@ class Database {
 }
 
 module.exports = new Database({
-    host: 'localhost', 
-    user: 'root', 
-    password: '1234', 
-    database: 'restaurante'
+    host: process.env.RDS_HOST, 
+    user: process.env.RDS_USER, 
+    password: process.env.RDS_PASS, 
+    database: process.env.RDS_DB
 });
