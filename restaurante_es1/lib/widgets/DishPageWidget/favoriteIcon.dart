@@ -24,7 +24,6 @@ class _FavoriteIconState extends State<FavoriteIcon> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
         child: isFavorite
             ? Icon(
                 Icons.favorite,

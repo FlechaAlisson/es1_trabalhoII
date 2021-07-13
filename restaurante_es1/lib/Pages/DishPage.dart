@@ -85,8 +85,12 @@ class _DishPageState extends State<DishPage> {
                                         ),
                                       ),
                                     ),
-                                    FavoriteIcon(
-                                      wasFavorite: true,
+                                    Container(
+                                      padding:
+                                          EdgeInsets.fromLTRB(30, 40, 30, 0),
+                                      child: FavoriteIcon(
+                                        wasFavorite: true,
+                                      ),
                                     )
                                   ],
                                 ),
