@@ -11,6 +11,13 @@ class AppTextStyles {
     fontSize: 16,
   );
 
+  static final TextStyle titlePurple = GoogleFonts.notoSans(
+    decoration: TextDecoration.none,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+    fontSize: 16,
+  );
+
   static final TextStyle discription = GoogleFonts.notoSans(
     decoration: TextDecoration.none,
     color: AppColors.grey,

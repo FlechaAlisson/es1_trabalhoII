@@ -32,6 +32,7 @@ dependencies:
   http: ^0.13.3
   fluttertoast: ^8.0.7
   animated_card: ^2.0.0
+  provider: ^5.0.0
   
 
 dev_dependencies:

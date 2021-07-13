@@ -6,6 +6,7 @@ class Pedido {
   String nome;
   String photoPath;
   String descricao;
+  int quantidade;
 
   Pedido({
     required this.id,
@@ -13,6 +14,7 @@ class Pedido {
     required this.nome,
     required this.photoPath,
     required this.descricao,
+    required this.quantidade,
   });
 
   Pedido copyWith({
@@ -21,6 +23,7 @@ class Pedido {
     String? nome,
     String? photoPath,
     String? descricao,
+    int? quantidade,
   }) {
     return Pedido(
       id: id ?? this.id,
@@ -28,6 +31,7 @@ class Pedido {
       nome: nome ?? this.nome,
       photoPath: photoPath ?? this.photoPath,
       descricao: descricao ?? this.descricao,
+      quantidade: quantidade ?? this.quantidade,
     );
   }
 
@@ -38,6 +42,7 @@ class Pedido {
       'nome': nome,
       'photoPath': photoPath,
       'descricao': descricao,
+      'quantidade': quantidade,
     };
   }
 
@@ -48,6 +53,7 @@ class Pedido {
       nome: map['nome'],
       photoPath: map['photoPath'],
       descricao: map['descricao'],
+      quantidade: map['quantidade'],
     );
   }
 
@@ -57,7 +63,7 @@ class Pedido {
 
   @override
   String toString() {
-    return 'Pedido(id: $id, valor: $valor, nome: $nome, photoPath: $photoPath, descricao: $descricao)';
+    return 'Pedido(id: $id, valor: $valor, nome: $nome, photoPath: $photoPath, descricao: $descricao, quantidade: $quantidade)';
   }
 
   @override
@@ -78,6 +84,7 @@ class Pedido {
         valor.hashCode ^
         nome.hashCode ^
         photoPath.hashCode ^
-        descricao.hashCode;
+        descricao.hashCode ^
+        quantidade.hashCode;
   }
 }
