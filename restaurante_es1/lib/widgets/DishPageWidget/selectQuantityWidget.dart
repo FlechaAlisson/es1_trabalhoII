@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
 
+typedef void IntCallback(int qt);
+
 class selectQuantityWidget extends StatefulWidget {
-  const selectQuantityWidget({Key? key}) : super(key: key);
+  final IntCallback onChangeQt;
+  const selectQuantityWidget({Key? key, required this.onChangeQt})
+      : super(key: key);
 
   @override
   _selectQuantityWidgetState createState() => _selectQuantityWidgetState();
@@ -45,7 +49,10 @@ class _selectQuantityWidgetState extends State<selectQuantityWidget> {
               Icons.add,
               color: AppColors.primaryColorButton,
             ),
-            onTap: () => setState(() => {quantidadePedido++}),
+            onTap: () => setState(() {
+              quantidadePedido++;
+              widget.onChangeQt(quantidadePedido);
+            }),
           )
         ],
       ),

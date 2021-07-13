@@ -6,7 +6,7 @@ var cors = require('cors')
 
 app.use(cors())
 
-app.get("/", (req, res) => {
+app.get("/prato", (req, res) => {
     res.json(
         [
             {
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
             },
             {
                 id: 3,
-                valor: "60,50",
+                valor: "60.50",
                 nome: "Canard à l'Orange",
                 photoPath: 'images/orange.png',
                 descricao: 'É um pato ao molho de laranja'
@@ -50,7 +50,7 @@ app.get("/prato/1", (req, res) => {
 app.get("/prato/2", (req, res) => {
     res.json(
         {
-            valor: "30,13",
+            valor: "30.13",
             nome: "Sopa de cebola",
             photoPath: 'images/sopinha.png',
             descricao_completa: 'A sopa de cebola gratinada é uma especialidade tradicional da culinária de França.',
@@ -66,7 +66,7 @@ app.get("/prato/2", (req, res) => {
 app.get("/prato/3", (req, res) => {
     res.json(
         {
-            valor: "60,50",
+            valor: "60.50",
             nome: "Canard à l'Orange",
             photoPath: 'images/orange.png',
             descricao_completa: 'É um pato ao molho de laranja',

@@ -27,12 +27,15 @@ class tileOrderWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              color: AppColors.background,
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.primaryColor),
+                color: AppColors.background,
+              ),
               width: 40,
               height: 40,
               child: Center(
                 child: Text(
-                  "X${quantidade}",
+                  "X$quantidade",
                   style: AppTextStyles.title,
                 ),
               ),
@@ -52,9 +55,15 @@ class tileOrderWidget extends StatelessWidget {
                   SizedBox(
                     height: 1,
                   ),
-                  Text(
-                    this.descricao,
-                    style: AppTextStyles.discription,
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Expanded(
+                      child: Text(
+                        this.descricao,
+                        style: AppTextStyles.discription,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
                 ],
               ),
