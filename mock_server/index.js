@@ -71,7 +71,6 @@ app.get("/prato/3", (req, res) => {
             photoPath: 'images/orange.png',
             descricao_completa: 'É um pato ao molho de laranja',
             ingredientes: 'Carne de pato, laranja, batata, açucar, óleo de soja e vinha.'
-
         }
     )
 })
