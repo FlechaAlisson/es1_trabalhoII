@@ -1,10 +1,22 @@
 const db = require("./database");
 
 class User{
+
+    Transacao = async (callback) => {
+        await db.query("BEGIN");
+        try {
+            await callback();
+            db.query("COMMIT");
+        } catch (e) {
+            await db.query("ROLLBACK");
+            throw e;
+        }
+    };
+
     async ListaPratos(id_cliente){
         return await db.query(`
             SELECT prato.*, coalesce(favoritos.id_pratos, 0) AS favorito FROM prato
-            LEFT JOIN favoritos ON favoritos.id_pratos = prato.id && favoritos.id_cliente = ?;`
+            LEFT JOIN favoritos ON favoritos.id_pratos = prato.id AND favoritos.id_cliente = ?;`
             ,[id_cliente]);
     }
 

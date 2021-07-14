@@ -1,4 +1,4 @@
-const db = require('../repository/user')
+const db = require('../repository/favoritos')
 
 class User {
     ListaFavoritos(id_cliente){
@@ -7,6 +7,10 @@ class User {
 
     AdicionaFavoritos(id_cliente, id_prato){
         return db.AdicionaFavoritos(id_cliente, id_prato);
+    }
+
+    RemoveFavoritos(id_cliente, id_prato){
+        return db.RemoveFavoritos(id_cliente, id_prato);
     }
 }
 

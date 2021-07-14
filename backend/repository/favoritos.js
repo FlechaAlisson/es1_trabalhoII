@@ -14,6 +14,10 @@ class User{
         ,[id_cliente, id_prato]);
     }
 
+    async RemoveFavoritos(id_cliente, id_prato){
+        return await db.query(`DELETE FROM favoritos WHERE id_cliente = ? AND id_pratos = ?;`, [id_cliente, id_prato]);
+    }
+
 }
 
 module.exports = new User();

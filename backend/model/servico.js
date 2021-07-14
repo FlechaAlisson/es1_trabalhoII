@@ -11,8 +11,8 @@ class Servico{
         return db.getPrato(id_prato);
     }
 
-    RealizaPedido(id_cliente, valor_total , pratos){
-        return db.RealizaPedido(id_cliente, valor_total , pratos);
+    async RealizaPedido(id_cliente, valor_total , pratos){
+        return db.Transacao(async () => {await db.RealizaPedido(id_cliente, valor_total , pratos)})
     }
 
 }

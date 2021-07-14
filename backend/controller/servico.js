@@ -24,13 +24,13 @@ module.exports = (app) => {
     })
     
     app.post("/servico/pedido-confirmado", (req, res) => {
-        servicoModel.RealizaPedido(req.body.id_cliente, req.body.valor_total, req.body.pratos)
-            .then(() =>{
-                return res.json({mensagem: 'Pedido realizado!'});
-            }) 
-            .catch(err => {
-                return res.status(400).json(err)
-            })
+        try{
+            servicoModel.RealizaPedido(req.body.id_cliente, req.body.valor_total, req.body.pratos)
+            return res.json({mensagem: 'Pedido realizado!'});
+        }
+        catch(err){
+            return res.status(400).json(err)
+        }
     })
 
 }
