@@ -30,37 +30,20 @@ class _FavoritePageState extends State<FavoritePage> {
         ),
       ),
       body: FutureBuilder<List<dynamic>>(
-          future: client.getAllPratos(),
+          future: client.getAllFavoritos(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data!.isEmpty) {
-                return Row(
-                  children: [
-                    Center(
-                      child: Text(
-                        "Nenhum favorito adicionado",
-                        style: AppTextStyles.titlePurple,
-                      ),
-                    ),
-                    Icon(
-                      Icons.no_food,
-                      color: AppColors.primaryColor,
-                    )
-                  ],
-                );
-              } else {
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, i) {
-                      return AnimatedCard(
-                        child: TileFavoriteFood(
-                            nome: snapshot.data![i]['nome'],
-                            photoPath: snapshot.data![i]['photoPath'],
-                            descricao: snapshot.data![i]['descricao_breve'],
-                            id: snapshot.data![i]['id']),
-                      );
-                    });
-              }
+              return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, i) {
+                    return AnimatedCard(
+                      child: TileFavoriteFood(
+                          nome: snapshot.data![i]['nome'],
+                          photoPath: snapshot.data![i]['photoPath'],
+                          descricao: snapshot.data![i]['descricao_breve'],
+                          id: snapshot.data![i]['id']),
+                    );
+                  });
             } else
               return Center(
                 child: CircularProgressIndicator(
