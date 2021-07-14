@@ -18,7 +18,7 @@ app.get("/prato", (req, res) => {
             },
             {
                 id: 2,
-                valor: "30,13",
+                valor: "30.13",
                 nome: "Sopa de cebola",
                 photoPath: 'images/sopinha.png',
                 descricao: 'É light'

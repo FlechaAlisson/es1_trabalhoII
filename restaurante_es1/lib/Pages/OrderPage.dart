@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_es1/client/pedidoClient.dart';
 import 'package:restaurante_es1/model/Cart.dart';
 
 import 'package:restaurante_es1/styles/app_colors.dart';
@@ -8,16 +9,15 @@ import 'package:restaurante_es1/styles/app_text_styles.dart';
 import 'package:restaurante_es1/widgets/OrderPageWidgets/listTileOrderWidget.dart';
 
 class BookingPage extends StatefulWidget {
-  final pratos;
   const BookingPage({
     Key? key,
-    required this.pratos,
   }) : super(key: key);
   @override
   _BookingPageState createState() => _BookingPageState();
 }
 
 class _BookingPageState extends State<BookingPage> {
+  PedidosClient client = PedidosClient();
   String dropdownValue = 'MasterCard';
   @override
   Widget build(BuildContext context) {
@@ -168,12 +168,14 @@ class _BookingPageState extends State<BookingPage> {
                 primary: AppColors.primaryColor,
                 fixedSize: Size(MediaQuery.of(context).size.width, 50)),
             onPressed: () {
+              client.saveOrder(1, cart.getTotalValue(), cart.items);
               Fluttertoast.showToast(
                 webBgColor: "linear-gradient(to right, #00b09b, #00b09b)",
                 webPosition: "center",
                 msg: "Pedido realizado com sucesso!",
                 fontSize: 30,
               );
+              cart.removeAll();
               Navigator.pop(context);
             },
             child: const Text('CONFIRMAR PEDIDO'),

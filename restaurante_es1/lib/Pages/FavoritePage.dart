@@ -1,4 +1,7 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurante_es1/client/favoritosClient.dart';
+import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
 import 'package:restaurante_es1/widgets/FavoritePageWidget/TileFavoriteFoodWidget.dart';
 
@@ -10,6 +13,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+  FavoritosClient client = new FavoritosClient();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +29,45 @@ class _FavoritePageState extends State<FavoritePage> {
           style: AppTextStyles.title,
         ),
       ),
-      body: ListView(
-        children: [
-          TileFavoriteFood(
-              nome: "comida",
-              photoPath: "images/rato.png",
-              descricao: "hmmm que deli",
-              id: 1),
-          TileFavoriteFood(
-              nome: "comida",
-              photoPath: "images/rato.png",
-              descricao: "hmmm que deli",
-              id: 1)
-        ],
-      ),
+      body: FutureBuilder<List<dynamic>>(
+          future: client.getAllPratos(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!.isEmpty) {
+                return Row(
+                  children: [
+                    Center(
+                      child: Text(
+                        "Nenhum favorito adicionado",
+                        style: AppTextStyles.titlePurple,
+                      ),
+                    ),
+                    Icon(
+                      Icons.no_food,
+                      color: AppColors.primaryColor,
+                    )
+                  ],
+                );
+              } else {
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, i) {
+                      return AnimatedCard(
+                        child: TileFavoriteFood(
+                            nome: snapshot.data![i]['nome'],
+                            photoPath: snapshot.data![i]['photoPath'],
+                            descricao: snapshot.data![i]['descricao_breve'],
+                            id: snapshot.data![i]['id']),
+                      );
+                    });
+              }
+            } else
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                ),
+              );
+          }),
     );
   }
 }

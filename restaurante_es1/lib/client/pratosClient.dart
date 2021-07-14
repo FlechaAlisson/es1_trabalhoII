@@ -15,7 +15,7 @@ class PratosClient {
   Future<Map<String, dynamic>> getPrato(int id) async {
     late Map<String, dynamic> prato;
     await http
-        .get(Uri.parse('${_urlBase}prato/$id'), headers: _headers)
+        .get(Uri.parse('$_urlBase/servico/prato/$id'), headers: _headers)
         .then((value) {
       prato = jsonDecode(value.body);
     });
@@ -23,12 +23,10 @@ class PratosClient {
   }
 
   Future<List<dynamic>> getAllPratos() async {
-    late List<dynamic> pratos;
-    await http
-        .get(Uri.parse('${_urlBase}prato/'), headers: _headers)
+    return await http
+        .get(Uri.parse('$_urlBase/servico/pratos/1'), headers: _headers)
         .then((value) {
-      pratos = jsonDecode(value.body);
+      return jsonDecode(value.body);
     });
-    return pratos;
   }
 }
