@@ -24,7 +24,7 @@ class PratosClient {
 
   Future<List<dynamic>> getAllPratos() async {
     return await http
-        .get(Uri.parse('$_urlBase/servico/pratos'), headers: _headers)
+        .get(Uri.parse('$_urlBase/servico/pratos/1'), headers: _headers)
         .then((value) {
       return jsonDecode(value.body);
     });

@@ -10,13 +10,15 @@ class tileFoodWidget extends StatelessWidget {
   final String photoPath;
   final String descricao;
   final int id;
+  final bool isFavorite;
   const tileFoodWidget(
       {Key? key,
       required this.valor,
       required this.nome,
       required this.photoPath,
       required this.descricao,
-      required this.id})
+      required this.id,
+      required this.isFavorite})
       : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class tileFoodWidget extends StatelessWidget {
               nome: this.nome,
               photoPath: this.photoPath,
               descricao: this.descricao,
+              isFavorite: this.isFavorite,
             ),
           ),
         );

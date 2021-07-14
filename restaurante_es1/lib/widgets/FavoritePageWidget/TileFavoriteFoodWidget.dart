@@ -67,7 +67,10 @@ class _TileFavoriteFoodState extends State<TileFavoriteFood> {
               ),
             ),
             Spacer(),
-            FavoriteIcon(wasFavorite: true),
+            FavoriteIcon(
+              wasFavorite: true,
+              id_prato: 1,
+            ),
             Divider(
               height: 5,
             )

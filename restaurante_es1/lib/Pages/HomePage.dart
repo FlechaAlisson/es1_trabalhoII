@@ -70,12 +70,14 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, i) {
                         return AnimatedCard(
                           child: tileFoodWidget(
-                              id: snapshot.data![i]['id'],
-                              valor:
-                                  snapshot.data![i]['valor'].toStringAsFixed(2),
-                              nome: snapshot.data![i]['nome'],
-                              photoPath: snapshot.data![i]['photoPath'],
-                              descricao: snapshot.data![i]['descricao_breve']),
+                            id: snapshot.data![i]['id'],
+                            valor:
+                                snapshot.data![i]['valor'].toStringAsFixed(2),
+                            nome: snapshot.data![i]['nome'],
+                            photoPath: snapshot.data![i]['photoPath'],
+                            descricao: snapshot.data![i]['descricao_breve'],
+                            isFavorite: snapshot.data![i]['favorito'] != 0,
+                          ),
                         );
                       },
                     );

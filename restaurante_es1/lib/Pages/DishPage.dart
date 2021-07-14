@@ -17,13 +17,16 @@ class DishPage extends StatefulWidget {
   final String photoPath;
   final String descricao;
   final int id;
+
+  final bool isFavorite;
   const DishPage(
       {Key? key,
       required this.id,
       required this.valor,
       required this.nome,
       required this.photoPath,
-      required this.descricao})
+      required this.descricao,
+      required this.isFavorite})
       : super(key: key);
 
   @override
@@ -88,7 +91,8 @@ class _DishPageState extends State<DishPage> {
                             Container(
                               padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
                               child: FavoriteIcon(
-                                wasFavorite: true,
+                                id_prato: widget.id,
+                                wasFavorite: widget.isFavorite,
                               ),
                             )
                           ],
