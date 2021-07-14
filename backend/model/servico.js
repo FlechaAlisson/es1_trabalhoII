@@ -3,8 +3,8 @@ const db = require('../repository/servico')
 
 class Servico{
 
-    ListaPratos(){
-        return db.ListaPratos();
+    ListaPratos(id_cliente){
+        return db.ListaPratos(id_cliente);
     }
     
     getPrato(id_prato){

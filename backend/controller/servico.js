@@ -3,8 +3,8 @@ const servicoModel = require("../model/servico");
 
 module.exports = (app) => {
     
-    app.get("/servico/pratos", async (req, res) => {
-        servicoModel.ListaPratos()
+    app.get("/servico/pratos/:id_cliente", async (req, res) => {
+        servicoModel.ListaPratos(req.params.id_cliente)
             .then(pratos => {
                 return res.json(pratos);
             })
