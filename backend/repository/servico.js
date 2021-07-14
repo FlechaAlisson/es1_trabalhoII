@@ -1,8 +1,11 @@
 const db = require("./database");
 
 class User{
-    async ListaPratos(){
-        return await db.query(`SELECT * FROM prato`);
+    async ListaPratos(id_cliente){
+        return await db.query(`
+            SELECT prato.*, coalesce(favoritos.id_pratos, 0) AS favorito FROM prato
+            LEFT JOIN favoritos ON favoritos.id_pratos = prato.id && favoritos.id_cliente = ?;`
+            ,[id_cliente]);
     }
 
     async getPrato(id_prato){
