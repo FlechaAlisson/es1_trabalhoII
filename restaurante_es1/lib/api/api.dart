@@ -1,3 +1,3 @@
 class API {
-  static var urlBase = "http://localhost:3000/";
+  static var urlBase = "http://localhost:3000";
 }

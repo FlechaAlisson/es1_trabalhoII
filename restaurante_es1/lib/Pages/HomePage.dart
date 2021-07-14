@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:restaurante_es1/client/pratosClient.dart';
 import 'package:restaurante_es1/model/Cart.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/widgets/HomePageWidget/tilePlateWidget.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,14 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var loading = false;
-  late List<dynamic> pratos;
   PratosClient client = PratosClient();
 
-  loadData() async {
-    loading = true;
-    pratos = await client.getAllPratos();
-    loading = false;
+  Future<List<dynamic>> loadData() async {
+    return await client.getAllPratos();
   }
 
   @override
@@ -36,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, cart, _) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Restaurante da Isabola"),
+            title: Text("Restaurante"),
             actions: [
               IconButton(
                   onPressed: () => Navigator.push(
@@ -54,8 +47,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          !loading ? BookingPage(pratos: pratos) : Container(),
+                      builder: (context) => BookingPage(),
                     ),
                   ),
                   backgroundColor: AppColors.primaryColor,
@@ -69,26 +61,24 @@ class _HomePageState extends State<HomePage> {
 
                   //Future Builder: Enquanto não carrega retorna um loading
                   // se carrega, retorna os widgets da pagina
-                  child: FutureBuilder(
+                  child: FutureBuilder<List<dynamic>>(
                 future: loadData(),
                 builder: (context, snapshot) {
-                  if (!loading) {
-                    return ListView.separated(
-                        itemBuilder: (context, index) {
-                          return AnimatedCard(
-                            child: tileFoodWidget(
-                                id: pratos[index]['id'],
-                                valor: pratos[index]['valor'],
-                                nome: pratos[index]['nome'],
-                                photoPath: pratos[index]['photoPath'],
-                                descricao: pratos[index]['descricao']),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(
-                              height: 8,
-                            ),
-                        itemCount: pratos.length);
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, i) {
+                        return AnimatedCard(
+                          child: tileFoodWidget(
+                              id: snapshot.data![i]['id'],
+                              valor:
+                                  snapshot.data![i]['valor'].toStringAsFixed(2),
+                              nome: snapshot.data![i]['nome'],
+                              photoPath: snapshot.data![i]['photoPath'],
+                              descricao: snapshot.data![i]['descricao_breve']),
+                        );
+                      },
+                    );
                   } else {
                     return SizedBox(
                       child: CircularProgressIndicator(
