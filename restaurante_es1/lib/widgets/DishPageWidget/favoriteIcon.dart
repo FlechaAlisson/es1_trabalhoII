@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurante_es1/client/favoritosClient.dart';
+import 'package:restaurante_es1/model/PratosList.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 
 class FavoriteIcon extends StatefulWidget {
-  final bool wasFavorite;
-  final int id_prato;
+  final bool comeFromFavoritePage;
+  final int index;
   const FavoriteIcon({
     Key? key,
-    required this.wasFavorite,
-    required this.id_prato,
+    required this.index,
+    required this.comeFromFavoritePage,
   }) : super(key: key);
 
   @override
@@ -16,37 +18,35 @@ class FavoriteIcon extends StatefulWidget {
 }
 
 class _FavoriteIconState extends State<FavoriteIcon> {
-  late bool isFavorite;
   FavoritosClient client = FavoritosClient();
-  @override
-  void initState() {
-    isFavorite = widget.wasFavorite;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        child: isFavorite
-            ? Icon(
-                Icons.favorite,
-                color: AppColors.primaryColor,
-              )
-            : Icon(
-                Icons.favorite_border,
-                color: AppColors.primaryColor,
-              ),
+    return Consumer<PratosList>(
+      builder: (context, pratos, _) => GestureDetector(
+        child: Container(
+          child: (pratos.pratos[widget.index].favorito != 0)
+              ? Icon(
+                  Icons.favorite,
+                  color: AppColors.primaryColor,
+                )
+              : Icon(
+                  Icons.favorite_border,
+                  color: AppColors.primaryColor,
+                ),
+        ),
+        onTap: () {
+          setState(() {
+            if (pratos.pratos[widget.index].favorito == 0) {
+              client.setFavorito(pratos.pratos[widget.index].id);
+              pratos.toogleFavorite(widget.index);
+            } else {
+              client.deleteFavorito(pratos.pratos[widget.index].id);
+              pratos.toogleFavorite(widget.index);
+            }
+          });
+        },
       ),
-      onTap: () {
-        setState(() {
-          if (!isFavorite) {
-            client.setFavorito(widget.id_prato);
-          } else {
-            client.deleteFavorito(widget.id_prato);
-          }
-          isFavorite = !isFavorite;
-        });
-      },
     );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:restaurante_es1/api/api.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:restaurante_es1/model/Prato.dart';
 
 class PratosClient {
   String _urlBase = API.urlBase;
@@ -27,5 +28,19 @@ class PratosClient {
         .then((value) {
       return jsonDecode(value.body);
     });
+  }
+
+  Future<List<Prato>> getAllPratosObj() async {
+    var myMap;
+    List<Prato> pratos = [];
+    await http
+        .get(Uri.parse('$_urlBase/servico/pratos/1'), headers: _headers)
+        .then((value) {
+      myMap = json.decode(value.body);
+      for (var model in myMap) {
+        pratos.add(Prato.fromMap(model));
+      }
+    });
+    return pratos;
   }
 }

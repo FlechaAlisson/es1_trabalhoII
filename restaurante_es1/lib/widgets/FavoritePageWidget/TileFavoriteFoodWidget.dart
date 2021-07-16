@@ -8,12 +8,14 @@ class TileFavoriteFood extends StatefulWidget {
   final String photoPath;
   final String descricao;
   final int id;
+  final int index;
   const TileFavoriteFood(
       {Key? key,
       required this.nome,
       required this.photoPath,
       required this.descricao,
-      required this.id})
+      required this.id,
+      required this.index})
       : super(key: key);
 
   @override
@@ -23,7 +25,6 @@ class TileFavoriteFood extends StatefulWidget {
 class _TileFavoriteFoodState extends State<TileFavoriteFood> {
   @override
   Widget build(BuildContext context) {
-    bool isFavorite = false;
     return Material(
       elevation: 5,
       child: Container(
@@ -68,8 +69,8 @@ class _TileFavoriteFoodState extends State<TileFavoriteFood> {
             ),
             Spacer(),
             FavoriteIcon(
-              wasFavorite: true,
-              id_prato: 1,
+              comeFromFavoritePage: true,
+              index: widget.index,
             ),
             Divider(
               height: 5,

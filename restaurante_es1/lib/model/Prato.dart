@@ -2,57 +2,69 @@ import 'dart:convert';
 
 class Prato {
   int id;
-  double valor;
   String nome;
+  String descricao_breve;
+  String descricao_completa;
+  String ingredientes;
+  double valor;
   String photoPath;
-  String descricao;
-  int isFavorito;
+  int favorito;
   Prato({
     required this.id,
-    required this.valor,
     required this.nome,
+    required this.descricao_breve,
+    required this.descricao_completa,
+    required this.ingredientes,
+    required this.valor,
     required this.photoPath,
-    required this.descricao,
-    required this.isFavorito,
+    required this.favorito,
   });
 
   Prato copyWith({
     int? id,
-    double? valor,
     String? nome,
+    String? descricao_breve,
+    String? descricao_completa,
+    String? ingredientes,
+    double? valor,
     String? photoPath,
-    String? descricao,
-    int? isFavorito,
+    int? favorito,
   }) {
     return Prato(
       id: id ?? this.id,
-      valor: valor ?? this.valor,
       nome: nome ?? this.nome,
+      descricao_breve: descricao_breve ?? this.descricao_breve,
+      descricao_completa: descricao_completa ?? this.descricao_completa,
+      ingredientes: ingredientes ?? this.ingredientes,
+      valor: valor ?? this.valor,
       photoPath: photoPath ?? this.photoPath,
-      descricao: descricao ?? this.descricao,
-      isFavorito: isFavorito ?? this.isFavorito,
+      favorito: favorito ?? this.favorito,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'valor': valor,
       'nome': nome,
+      'descricao_breve': descricao_breve,
+      'descricao_completa': descricao_completa,
+      'ingredientes': ingredientes,
+      'valor': valor,
       'photoPath': photoPath,
-      'descricao': descricao,
-      'isFavorito': isFavorito,
+      'favorito': favorito,
     };
   }
 
   factory Prato.fromMap(Map<String, dynamic> map) {
     return Prato(
       id: map['id'],
-      valor: map['valor'],
       nome: map['nome'],
-      photoPath: map['photoPath'],
-      descricao: map['descricao'],
-      isFavorito: map['isFavorito'],
+      descricao_breve: map['descricao_breve'],
+      descricao_completa: map['descricao_completa'],
+      ingredientes: map['ingredientes'],
+      valor: map['valor'],
+      photoPath: "images/" + map['photoPath'],
+      favorito: map['favorito'],
     );
   }
 
@@ -62,7 +74,7 @@ class Prato {
 
   @override
   String toString() {
-    return 'Prato(id: $id, valor: $valor, nome: $nome, photoPath: $photoPath, descricao: $descricao, isFavorito: $isFavorito)';
+    return 'Prato(id: $id, nome: $nome, descricao_breve: $descricao_breve, descricao_completa: $descricao_completa, ingredientes: $ingredientes, valor: $valor, photoPath: $photoPath, favorito: $favorito)';
   }
 
   @override
@@ -71,20 +83,24 @@ class Prato {
 
     return other is Prato &&
         other.id == id &&
-        other.valor == valor &&
         other.nome == nome &&
+        other.descricao_breve == descricao_breve &&
+        other.descricao_completa == descricao_completa &&
+        other.ingredientes == ingredientes &&
+        other.valor == valor &&
         other.photoPath == photoPath &&
-        other.descricao == descricao &&
-        other.isFavorito == isFavorito;
+        other.favorito == favorito;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        valor.hashCode ^
         nome.hashCode ^
+        descricao_breve.hashCode ^
+        descricao_completa.hashCode ^
+        ingredientes.hashCode ^
+        valor.hashCode ^
         photoPath.hashCode ^
-        descricao.hashCode ^
-        isFavorito.hashCode;
+        favorito.hashCode;
   }
 }
