@@ -16,7 +16,7 @@ module.exports = (app) => {
     })
     
     app.get("/servico/pratos/", (req, res) => {
-        servicoModel.ListaPratos(req.params.id)
+        servicoModel.ListaPratos()
             .then(pratos => {
                 console.log(pratos);
                 return res.json(pratos);

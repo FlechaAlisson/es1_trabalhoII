@@ -3,9 +3,8 @@ const db = require("./database");
 class User{
     async ListaFavoritos(id_cliente){
         return await db.query(`
-            SELECT prato.* FROM prato
-                JOIN favoritos on favoritos.id_pratos = prato.id
-                WHERE favoritos.id_cliente = ?
+            SELECT prato.*, coalesce(favoritos.id_pratos, 0) AS favorito FROM prato
+            LEFT JOIN favoritos ON favoritos.id_pratos = prato.id AND favoritos.id_cliente = ?;
         `, [id_cliente]);
     }
 

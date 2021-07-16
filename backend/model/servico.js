@@ -4,8 +4,8 @@ const { configPhotoPath } = require('../public/globals')
 
 class Servico{
 
-    async ListaPratos(id_cliente){
-       return await configPhotoPath(db.ListaPratos, id_cliente)
+    async ListaPratos(){
+       return await configPhotoPath(db.ListaPratos)
     }
     
     async getPrato(id_prato){
