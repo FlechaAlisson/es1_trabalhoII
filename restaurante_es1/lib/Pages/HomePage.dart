@@ -23,6 +23,10 @@ class _HomePageState extends State<HomePage> {
     return await client.getAllPratos();
   }
 
+  changeState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CartModel>(

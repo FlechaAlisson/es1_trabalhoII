@@ -14,16 +14,24 @@ class FavoritosClient {
   Future<void> setFavorito(int id) async {
     var body = json.encode({"id_prato": id});
     await http
-        .post(Uri.parse('$_urlBase/user/1/favoritos/adiciona'),
+        .post(Uri.parse('$_urlBase/user/1/favoritos'),
             headers: _headers, body: body)
         .then((value) => print(value.body));
   }
 
-  Future<List<dynamic>> getAllPratos() async {
+  Future<List<dynamic>> getAllFavoritos() async {
     return await http
-        .get(Uri.parse('$_urlBase/user/1/favoritos/lista'), headers: _headers)
+        .get(Uri.parse('$_urlBase/user/1/favoritos'), headers: _headers)
         .then((value) {
       return jsonDecode(value.body);
     });
+  }
+
+  Future<void> deleteFavorito(int id) async {
+    var body = json.encode({"id_prato": id});
+    await http
+        .delete(Uri.parse('$_urlBase/user/1/favoritos'),
+            headers: _headers, body: body)
+        .then((value) => print(value.body));
   }
 }

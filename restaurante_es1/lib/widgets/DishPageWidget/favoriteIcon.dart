@@ -39,7 +39,11 @@ class _FavoriteIconState extends State<FavoriteIcon> {
       ),
       onTap: () {
         setState(() {
-          client.setFavorito(widget.id_prato);
+          if (!isFavorite) {
+            client.setFavorito(widget.id_prato);
+          } else {
+            client.deleteFavorito(widget.id_prato);
+          }
           isFavorite = !isFavorite;
         });
       },

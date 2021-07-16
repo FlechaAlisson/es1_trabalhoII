@@ -11,15 +11,15 @@ class tileFoodWidget extends StatelessWidget {
   final String descricao;
   final int id;
   final bool isFavorite;
-  const tileFoodWidget(
-      {Key? key,
-      required this.valor,
-      required this.nome,
-      required this.photoPath,
-      required this.descricao,
-      required this.id,
-      required this.isFavorite})
-      : super(key: key);
+  const tileFoodWidget({
+    Key? key,
+    required this.valor,
+    required this.nome,
+    required this.photoPath,
+    required this.descricao,
+    required this.id,
+    required this.isFavorite,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
