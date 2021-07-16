@@ -34,10 +34,11 @@ class PratosClient {
     var myMap;
     List<Prato> pratos = [];
     await http
-        .get(Uri.parse('$_urlBase/servico/pratos/1'), headers: _headers)
+        .get(Uri.parse('$_urlBase/user/1/favoritos'), headers: _headers)
         .then((value) {
       myMap = json.decode(value.body);
       for (var model in myMap) {
+        print(model);
         pratos.add(Prato.fromMap(model));
       }
     });
