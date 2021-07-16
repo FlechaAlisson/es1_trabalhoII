@@ -41,7 +41,7 @@ class _FavoritePageState extends State<FavoritePage> {
                 return AnimatedCard(
                   child: TileFavoriteFood(
                     nome: list.pratos[i].nome,
-                    photoPath: list.pratos[i].photoPath,
+                    photoUrl: list.pratos[i].photoUrl,
                     descricao: list.pratos[i].descricao_breve,
                     id: list.pratos[i].id,
                     index: i,

@@ -41,10 +41,9 @@ class tileFoodWidget extends StatelessWidget {
                     height: 50.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            pratos.pratos[this.index].photoPath,
-                          )),
+                        fit: BoxFit.cover,
+                        image: NetworkImage(pratos.pratos[this.index].photoUrl),
+                      ),
                       borderRadius: BorderRadius.all(Radius.circular(360.0)),
                     ),
                   ),
