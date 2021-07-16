@@ -6,6 +6,7 @@ import 'package:restaurante_es1/Pages/OrderPage.dart';
 import 'package:restaurante_es1/Pages/PerfilPage.dart';
 import 'package:restaurante_es1/client/pratosClient.dart';
 import 'package:restaurante_es1/model/Cart.dart';
+import 'package:restaurante_es1/model/PratosList.dart';
 import 'package:restaurante_es1/styles/app_colors.dart';
 import 'package:restaurante_es1/widgets/HomePageWidget/tilePlateWidget.dart';
 
@@ -23,14 +24,15 @@ class _HomePageState extends State<HomePage> {
     return await client.getAllPratos();
   }
 
-  changeState() {
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CartModel>(
-      builder: (context, cart, _) => SafeArea(
+    return Consumer2<CartModel, PratosList>(
+      builder: (context, cart, pratos, __) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text("Restaurante"),
@@ -65,22 +67,16 @@ class _HomePageState extends State<HomePage> {
 
                   //Future Builder: Enquanto não carrega retorna um loading
                   // se carrega, retorna os widgets da pagina
-                  child: FutureBuilder<List<dynamic>>(
-                future: loadData(),
+                  child: FutureBuilder<dynamic>(
+                future: pratos.getAll(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
-                      itemCount: snapshot.data!.length,
+                      itemCount: pratos.pratos.length,
                       itemBuilder: (context, i) {
                         return AnimatedCard(
                           child: tileFoodWidget(
-                            id: snapshot.data![i]['id'],
-                            valor:
-                                snapshot.data![i]['valor'].toStringAsFixed(2),
-                            nome: snapshot.data![i]['nome'],
-                            photoPath: snapshot.data![i]['photoPath'],
-                            descricao: snapshot.data![i]['descricao_breve'],
-                            isFavorite: snapshot.data![i]['favorito'] != 0,
+                            index: i,
                           ),
                         );
                       },
