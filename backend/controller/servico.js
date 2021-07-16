@@ -2,10 +2,23 @@ const servicoModel = require("../model/servico");
 
 
 module.exports = (app) => {
+
+    app.get('/servico/pratos/:id/imagem', (req, res) => {
+        servicoModel.getPrato(req.params.id)
+            .then(prato => {
+                var dir = __dirname;
+                dir = dir.replace('controller', 'images')
+                res.sendFile(dir + "\\" + prato[0].photoPath);
+            })
+            .catch(err => {
+                return res.status(500).json(err);
+            })
+    })
     
-    app.get("/servico/pratos/:id_cliente", async (req, res) => {
-        servicoModel.ListaPratos(req.params.id_cliente)
+    app.get("/servico/pratos/", (req, res) => {
+        servicoModel.ListaPratos(req.params.id)
             .then(pratos => {
+                console.log(pratos);
                 return res.json(pratos);
             })
             .catch(err => {

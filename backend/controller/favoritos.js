@@ -1,7 +1,7 @@
 const userModel = require("../model/favoritos");
 
-
 module.exports = (app) => {
+    
     app.get("/user/:id/favoritos", (req, res) => {
         userModel.ListaFavoritos(req.params.id)
             .then(favoritos => {

@@ -1,14 +1,15 @@
 const db = require('../repository/servico')
+const { configPhotoPath } = require('../public/globals')
 
 
 class Servico{
 
-    ListaPratos(id_cliente){
-        return db.ListaPratos(id_cliente);
+    async ListaPratos(id_cliente){
+       return await configPhotoPath(db.ListaPratos, id_cliente)
     }
     
-    getPrato(id_prato){
-        return db.getPrato(id_prato);
+    async getPrato(id_prato){
+        return await configPhotoPath(db.getPrato, id_prato)
     }
 
     async RealizaPedido(id_cliente, valor_total , pratos){
