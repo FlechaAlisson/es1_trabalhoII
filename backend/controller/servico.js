@@ -38,7 +38,7 @@ module.exports = (app) => {
     
     app.post("/servico/pedido-confirmado", (req, res) => {
         try{
-            servicoModel.RealizaPedido(req.body.id_cliente, req.body.valor_total, req.body.pratos)
+            servicoModel.RealizaPedido(req.body.id_cliente, req.body.pratos)
             return res.json({mensagem: 'Pedido realizado!'});
         }
         catch(err){

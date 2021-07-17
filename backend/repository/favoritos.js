@@ -1,6 +1,6 @@
 const db = require("./database");
 
-class User{
+class Favoritos{
     async ListaFavoritos(id_cliente){
         return await db.query(`
             SELECT prato.*, coalesce(favoritos.id_pratos, 0) AS favorito FROM prato
@@ -19,4 +19,4 @@ class User{
 
 }
 
-module.exports = new User();
+module.exports = new Favoritos();
