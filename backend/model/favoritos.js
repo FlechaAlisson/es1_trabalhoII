@@ -1,7 +1,7 @@
 const db = require('../repository/favoritos')
 const { configPhotoPath } = require('../public/globals')
 
-class User {
+class Favoritos {
     async ListaFavoritos(id_cliente){
         return await configPhotoPath(db.ListaFavoritos , id_cliente);
     }
@@ -15,4 +15,4 @@ class User {
     }
 }
 
-module.exports = new User();
+module.exports = new Favoritos();

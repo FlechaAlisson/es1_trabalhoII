@@ -1,9 +1,9 @@
-const userModel = require("../model/favoritos");
+const favModel = require("../model/favoritos");
 
 module.exports = (app) => {
     
     app.get("/user/:id/favoritos", (req, res) => {
-        userModel.ListaFavoritos(req.params.id)
+        favModel.ListaFavoritos(req.params.id)
             .then(favoritos => {
                 return res.json(favoritos); 
             })
@@ -14,7 +14,7 @@ module.exports = (app) => {
 
     
     app.post("/user/:id/favoritos", async (req, res) => {
-        userModel.AdicionaFavoritos(req.params.id, req.body.id_prato)
+        favModel.AdicionaFavoritos(req.params.id, req.body.id_prato)
         .then(() => {
             return res.json({mensagem: 'Prato adicionado aos favoritos'});
         })
@@ -25,7 +25,7 @@ module.exports = (app) => {
     })
  
     app.delete("/user/:id/favoritos", (req, res) => {
-        userModel.RemoveFavoritos(req.params.id, req.body.id_prato)
+        favModel.RemoveFavoritos(req.params.id, req.body.id_prato)
             .then(() => {
                 return res.json({mensagem: 'Prato removido dos favoritos'});
             })

@@ -12,8 +12,9 @@ class Servico{
         return await configPhotoPath(db.getPrato, id_prato)
     }
 
-    async RealizaPedido(id_cliente, valor_total , pratos){
-        return db.Transacao(async () => {await db.RealizaPedido(id_cliente, valor_total , pratos)})
+    async RealizaPedido(id_cliente, pratos){
+        const soma = await db.valor_pratos(pratos);
+        return db.Transacao(async () => {await db.RealizaPedido(id_cliente, soma, pratos)})
     }
 
 }
