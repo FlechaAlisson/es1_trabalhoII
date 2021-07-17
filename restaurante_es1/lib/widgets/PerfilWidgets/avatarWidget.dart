@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurante_es1/client/userClient.dart';
+import 'package:restaurante_es1/model/User.dart';
 import 'package:restaurante_es1/styles/app_text_styles.dart';
 
 class AvatarWidget extends StatefulWidget {
@@ -10,9 +11,11 @@ class AvatarWidget extends StatefulWidget {
 }
 
 class _AvatarWidgetState extends State<AvatarWidget> {
-  getUser() {
+  late User user;
+  getUser() async {
     UserClient client = UserClient();
-    return client.getUser(1);
+    user = await client.getUser(1);
+    print(user.nome);
   }
 
   @override
@@ -20,7 +23,7 @@ class _AvatarWidgetState extends State<AvatarWidget> {
     return FutureBuilder(
         future: getUser(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.done) {
             return Row(
               children: [
                 Container(
@@ -43,9 +46,7 @@ class _AvatarWidgetState extends State<AvatarWidget> {
                     text: "Olá ",
                     style: AppTextStyles.textSimple,
                     children: [
-                      TextSpan(
-                          text: snapshot.data!['nome'],
-                          style: AppTextStyles.title),
+                      TextSpan(text: user.nome, style: AppTextStyles.title),
                       TextSpan(text: "!", style: AppTextStyles.textSimple)
                     ],
                   ),

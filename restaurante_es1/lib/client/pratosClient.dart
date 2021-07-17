@@ -38,7 +38,6 @@ class PratosClient {
         .then((value) {
       myMap = json.decode(value.body);
       for (var model in myMap) {
-        print(model);
         pratos.add(Prato.fromMap(model));
       }
     });
