@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <h1>RESTAURANTE</h1>
+
+    <div v-if="user != undefined">
+      <b> Usuário: {{user.nome}} </b>
+    </div>
     
     <b-row align-content="start" v-for="prato in list_pratos" :key="prato.id">
       <b-col class="col"><b-avatar variant="info" size="3rem" :src="prato.photoUrl"></b-avatar></b-col>
@@ -63,7 +67,8 @@ export default {
         valor_total: 0,
         pratos: [],
       },
-      favoritos: []
+      favoritos: [],
+      user: undefined
     };
   },
 
@@ -114,7 +119,7 @@ export default {
 
   created() {
     pratosClient.getAllPratosFromUser().then((r) => (this.list_pratos = r));
-    userClient.getUser(1);
+    userClient.getUser(1).then(r => {this.user = r})
   },
 };
 </script>

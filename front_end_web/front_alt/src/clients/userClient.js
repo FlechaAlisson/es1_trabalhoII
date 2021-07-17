@@ -1,8 +1,9 @@
 import { connRefactor } from "./req.conf"
 
-const getUser = (id) => {
-    let body = JSON.stringify({ id_prato: id })
-    connRefactor.post(`/user/${id}`, body).then((r) => console.log(r))
+const getUser = async (id) => {
+    return await connRefactor.get(`/user/${id}`).then((r) => {
+        return r.data[0]
+    })
 }
 export default {
     getUser

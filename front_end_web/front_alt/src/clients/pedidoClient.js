@@ -8,8 +8,7 @@ const saveOrder = (pedidos) => {
         });
         let body = JSON.stringify({
             id_cliente: 1,
-            pratos: list,
-            valor_total: pedidos.valor_total
+            pratos: list
         })
         
     connRefactor.post('/servico/pedido-confirmado', body).then((r) => { return r.data;})
