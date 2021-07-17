@@ -5,14 +5,14 @@ import 'package:restaurante_es1/widgets/DishPageWidget/favoriteIcon.dart';
 
 class TileFavoriteFood extends StatefulWidget {
   final String nome;
-  final String photoPath;
+  final String photoUrl;
   final String descricao;
   final int id;
   final int index;
   const TileFavoriteFood(
       {Key? key,
       required this.nome,
-      required this.photoPath,
+      required this.photoUrl,
       required this.descricao,
       required this.id,
       required this.index})
@@ -39,10 +39,7 @@ class _TileFavoriteFoodState extends State<TileFavoriteFood> {
               height: 50.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      widget.photoPath,
-                    )),
+                    fit: BoxFit.cover, image: NetworkImage(widget.photoUrl)),
                 borderRadius: BorderRadius.all(Radius.circular(360.0)),
               ),
             ),

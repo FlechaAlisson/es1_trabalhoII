@@ -62,9 +62,8 @@ class _DishPageState extends State<DishPage> {
                       width: 500,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(
-                              pratos.pratos[widget.index].photoPath,
-                            ),
+                            image: NetworkImage(
+                                pratos.pratos[widget.index].photoUrl),
                             fit: BoxFit.fill),
                       ),
                     ),

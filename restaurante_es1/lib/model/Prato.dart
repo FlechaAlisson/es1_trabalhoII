@@ -9,6 +9,7 @@ class Prato {
   double valor;
   String photoPath;
   int favorito;
+  String photoUrl;
   Prato({
     required this.id,
     required this.nome,
@@ -18,6 +19,7 @@ class Prato {
     required this.valor,
     required this.photoPath,
     required this.favorito,
+    required this.photoUrl,
   });
 
   Prato copyWith({
@@ -29,6 +31,7 @@ class Prato {
     double? valor,
     String? photoPath,
     int? favorito,
+    String? photoUrl,
   }) {
     return Prato(
       id: id ?? this.id,
@@ -39,6 +42,7 @@ class Prato {
       valor: valor ?? this.valor,
       photoPath: photoPath ?? this.photoPath,
       favorito: favorito ?? this.favorito,
+      photoUrl: photoUrl ?? this.photoUrl,
     );
   }
 
@@ -52,6 +56,7 @@ class Prato {
       'valor': valor,
       'photoPath': photoPath,
       'favorito': favorito,
+      'photoUrl': photoUrl,
     };
   }
 
@@ -63,8 +68,9 @@ class Prato {
       descricao_completa: map['descricao_completa'],
       ingredientes: map['ingredientes'],
       valor: map['valor'],
-      photoPath: "images/" + map['photoPath'],
+      photoPath: map['photoPath'],
       favorito: map['favorito'],
+      photoUrl: map['photoUrl'],
     );
   }
 
@@ -74,7 +80,7 @@ class Prato {
 
   @override
   String toString() {
-    return 'Prato(id: $id, nome: $nome, descricao_breve: $descricao_breve, descricao_completa: $descricao_completa, ingredientes: $ingredientes, valor: $valor, photoPath: $photoPath, favorito: $favorito)';
+    return 'Prato(id: $id, nome: $nome, descricao_breve: $descricao_breve, descricao_completa: $descricao_completa, ingredientes: $ingredientes, valor: $valor, photoPath: $photoPath, favorito: $favorito, photoUrl: $photoUrl)';
   }
 
   @override
@@ -89,7 +95,8 @@ class Prato {
         other.ingredientes == ingredientes &&
         other.valor == valor &&
         other.photoPath == photoPath &&
-        other.favorito == favorito;
+        other.favorito == favorito &&
+        other.photoUrl == photoUrl;
   }
 
   @override
@@ -101,6 +108,7 @@ class Prato {
         ingredientes.hashCode ^
         valor.hashCode ^
         photoPath.hashCode ^
-        favorito.hashCode;
+        favorito.hashCode ^
+        photoUrl.hashCode;
   }
 }
