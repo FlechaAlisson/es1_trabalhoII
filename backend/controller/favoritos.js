@@ -23,7 +23,6 @@ module.exports = (app) => {
             return res.status(400).json(e)
         })
     })
- 
     app.delete("/user/:id/favoritos", (req, res) => {
         favModel.RemoveFavoritos(req.params.id, req.body.id_prato)
             .then(() => {

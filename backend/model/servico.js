@@ -1,5 +1,5 @@
 const db = require('../repository/servico')
-const { configPhotoPath } = require('../public/globals')
+const { configPhotoPath } = require('../common/funcoes')
 
 
 class Servico{

@@ -1,5 +1,5 @@
 const db = require('../repository/favoritos')
-const { configPhotoPath } = require('../public/globals')
+const { configPhotoPath } = require('../common/funcoes')
 
 class Favoritos {
     async ListaFavoritos(id_cliente){
