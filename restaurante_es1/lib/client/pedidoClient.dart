@@ -18,8 +18,7 @@ class PedidosClient {
     for (var item in pedidos) {
       list.add({"id": item.id, "quantidade": item.quantidade});
     }
-    String body = json
-        .encode({"id_cliente": 1, "valor_total": valueTotal, "pratos": list});
+    String body = json.encode({"id_cliente": 1, "pratos": list});
     print(body);
 
     var res = await http.post(
