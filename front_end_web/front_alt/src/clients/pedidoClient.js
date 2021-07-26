@@ -1,4 +1,4 @@
-import { connRefactor } from "./req.conf"
+import { conn } from "./req.conf"
 
 
 const saveOrder = (pedidos) => {
@@ -11,7 +11,7 @@ const saveOrder = (pedidos) => {
             pratos: list
         })
         
-    connRefactor.post('/servico/pedido-confirmado', body).then((r) => { return r.data;})
+        conn.post('/servico/pedido-confirmado', body).then((r) => { return r.data;})
 }
 
 export default {saveOrder}

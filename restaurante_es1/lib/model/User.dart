@@ -3,13 +3,11 @@ import 'dart:convert';
 class User {
   int id;
   String nome;
-  String endereco;
   String email;
   String fone;
   User({
     required this.id,
     required this.nome,
-    required this.endereco,
     required this.email,
     required this.fone,
   });
@@ -18,7 +16,6 @@ class User {
     return {
       'id': id,
       'nome': nome,
-      'endereco': endereco,
       'email': email,
       'fone': fone,
     };
@@ -28,7 +25,6 @@ class User {
     return User(
       id: map['id'],
       nome: map['nome'],
-      endereco: map['endereco'],
       email: map['email'],
       fone: map['fone'],
     );

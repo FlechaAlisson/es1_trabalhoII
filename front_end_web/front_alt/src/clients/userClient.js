@@ -1,7 +1,7 @@
-import { connRefactor } from "./req.conf"
+import { conn } from "./req.conf"
 
 const getUser = async (id) => {
-    return await connRefactor.get(`/user/${id}`).then((r) => {
+    return await conn.get(`/user/${id}`).then((r) => {
         return r.data[0]
     })
 }

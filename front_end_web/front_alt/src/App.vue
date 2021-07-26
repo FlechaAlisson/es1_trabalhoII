@@ -34,7 +34,7 @@
               >
             </div>
             <b-col class="col"
-              ><b-button class="btn" variant="danger" @click="carrinho = []"
+              ><b-button class="btn" variant="danger" @click="clearLittleCar"
                 >limpar carrinho</b-button
               >
               <b-button class="btn" variant="success" @click="saveOrder"
@@ -84,7 +84,12 @@ export default {
         favoritoClient.setFavorito(prato.id)
       }
     },
-
+    clearLittleCar(){
+      this.carrinho = {
+        valor_total: 0,
+        pratos: [],
+      }
+    },
     addCarrinho(prato) {
       let exists = false;
 
@@ -108,12 +113,17 @@ export default {
     },
 
     saveOrder() {
-      pedidoClient.saveOrder(this.carrinho);
+      if (this.carrinho.pratos.length > 0) {
+        pedidoClient.saveOrder(this.carrinho);
       this.carrinho = {
         valor_total: 0,
         pratos: [],
       }
-      window.alert("pedido realizado");
+      window.alert("pedido realizado!");
+      } else {
+        window.alert('escolha um prato.')
+        
+      }
     },
   },
 

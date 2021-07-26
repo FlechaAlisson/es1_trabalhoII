@@ -1,7 +1,7 @@
-import { connRefactor } from "./req.conf"
+import { conn } from "./req.conf"
 
 const getAllPratosFromUser = async () => {
-     const r =  await connRefactor.get("user/1/favoritos")
+     const r =  await conn.get("user/1/favoritos")
      return (r.data)
 }
 

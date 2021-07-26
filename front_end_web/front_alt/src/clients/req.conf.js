@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const connRefactor = axios.create({
+const conn = axios.create({
     baseURL: 'http://localhost:3000',
     headers: {
       // eslint-disable-next-line
@@ -9,4 +9,4 @@ const connRefactor = axios.create({
     },
   })
 
-  export {connRefactor};
+  export {conn};
